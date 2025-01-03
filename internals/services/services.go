@@ -2,9 +2,10 @@ package services
 
 import (
 	"flag"
-	"fmt"
+	"strings"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/byedeep/osama/constants"
 )
 
 var Token string
@@ -22,11 +23,16 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
-	fmt.Println("Sent message", m.Content)
 
-	if m.Content == "Osama" {
-		s.ChannelMessageSend(m.ChannelID, "Binladen")
+	words := strings.Split(strings.ToLower(m.Content), " ")
 
+	for _, word := range words {
+		for message, reply := range constants.MessageReplies {
+			if word == message {
+				s.ChannelMessageSend(m.ChannelID, reply)
+
+			}
+		}
 	}
 
 }

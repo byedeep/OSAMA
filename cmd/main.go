@@ -21,7 +21,7 @@ func main() {
 
 	dg.AddHandler(services.MessageCreate)
 
-	dg.Identify.Intents = discordgo.IntentGuildMessages
+	dg.Identify.Intents = discordgo.IntentGuildMessages | discordgo.IntentGuildMessageTyping
 
 	err = dg.Open()
 	if err != nil {
