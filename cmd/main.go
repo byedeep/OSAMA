@@ -16,7 +16,11 @@ func main() {
 		fmt.Println("Error creating session")
 		return
 	}
-
+	err = services.ReadFile("data.CSV")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	dg.AddHandler(services.Ready)
 
 	dg.AddHandler(services.MessageCreate)
