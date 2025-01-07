@@ -16,7 +16,7 @@ func main() {
 		fmt.Println("Error creating session")
 		return
 	}
-	err = services.ReadFile("data.CSV")
+	err = services.ReadFile("../data/data.CSV")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -26,6 +26,13 @@ func main() {
 	dg.AddHandler(services.MessageCreate)
 
 	dg.Identify.Intents = discordgo.IntentGuildMessages | discordgo.IntentGuildMessageTyping
+
+	/*	SlashCommand := &discordgo.ApplicationCommand{
+			Name: "Create",
+			Description: "/Create <Keyword> <Reply>",
+		}
+
+		_, err := dg.ApplicationCommandCreate()*/
 
 	err = dg.Open()
 	if err != nil {
